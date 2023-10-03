@@ -1,0 +1,60 @@
+<div class="wrap">
+    <h2><?php echo $_ENV['PLUGIN_TITLE']; ?></h2>
+    <p>SPFレコード設定を確認するFQDNかメールアドレスを入力して下さい。</p>
+
+    <?php foreach ($errorMessage as $message): ?>
+        <p style="color:#ff0000"><?php echo $message; ?></p>
+    <?php endforeach; ?>
+
+    <form method="post">
+        <?php wp_nonce_field($_ENV['PLUGIN_ACTION'], $_ENV['PLUGIN_NONCE']); ?>
+
+        <table class="form-table">
+            <tr valign="top">
+                <th scope="row">選択して下さい</th>
+                <td>
+                    <fieldset>
+                        <label>
+                            <input type="radio" id="typeEmail" name="type" value="Email" required
+                            <?php checked('Email', filter_input(INPUT_POST, 'type')); ?>
+                            <?php echo !filter_input(INPUT_POST, 'type')? 'checked' : ''; ?>>
+                            Email
+                        </label><br>
+                        <label>
+                            <input type="radio" id="typeFQDN" name="type" value="FQDN" required
+                            <?php checked('FQDN', filter_input(INPUT_POST, 'type')); ?>>
+                            FQDN
+                        </label>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr valign="top">
+                <th scope="row" id="typeOfField">Emailアドレス</th>
+                <td><input type="text" name="mail_host_address" value="<?php echo filter_input(INPUT_POST, 'mail_host_address'); ?>" required /></td>
+            </tr>
+        </table>
+
+        <div class="submit">
+            <input type="submit" class="button-primary" value="検証">
+        </div>
+    </form>
+    <?php if ($viewResult): ?>
+        <?php require_once __DIR__ . $_ENV['PLUGIN_PAGE_RESULT']; ?>
+    <?php endif; ?>
+</div>
+
+<script>
+    const field = document.getElementById('typeOfField')
+    document.querySelector('input[name="type"]:checked').value === 'Email'
+        ? field.innerHTML = 'Emailアドレス'
+        : field.innerHTML = 'FQDN';
+
+    document.getElementById('typeEmail').addEventListener('click', function() {
+        console.log('e')
+        field.innerText = 'Emailアドレス'
+    })
+    document.getElementById('typeFQDN').addEventListener('click', function() {
+        console.log('f')
+        field.innerText = 'FQDN'
+    })
+</script>

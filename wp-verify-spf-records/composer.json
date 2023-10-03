@@ -1,0 +1,24 @@
+{
+    "name": "nzsys/wp-verify-spf-records",
+    "description": "GOMI!!",
+    "version": "0",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Nzsys\\EnvelopFixer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Nzsys\\EnvelopFixer\\": "tests/"
+        }
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.5"
+    },
+    "require-dev": {
+        "psy/psysh": "@stable",
+        "phpunit/phpunit": "^10.2"
+    }
+}

@@ -1,0 +1,14 @@
+<?php if (filter_input(INPUT_POST, 'type') === 'Email'): ?>
+    <hr>
+    <form method="post">
+        <p>このEmailアドレスをEnvelope Fromに設定しますか？</p>
+        <p>
+            そもそもそんなことする必要ないので、Fromに設定されたEmailをEnvelopeFromにすれば良いけど<br />
+            何故かこのEmailアドレスでEnvelope Fromを設定したいって場合はoptionに登録する処理を追加。
+        </p>
+        <div class="submit">
+            <input type="hidden" name="saved_envelope_from" value="<?php echo filter_input(INPUT_POST, 'mail_host_address'); ?>">
+            <input type="submit" class="button-primary" value="登録する">
+        </div>
+    </form>
+<?php endif; ?>
